@@ -44,22 +44,12 @@
         },
         "sheetName": {
           "__rl": true,
-          "value": "gid=0",
-          "mode": "list",
-          "cachedResultName": "Data",
-          "cachedResultUrl": "https://docs.google.com/spreadsheets/d/1L069PZs84Gj0vDDF5qbIaB0O8MUByOGj7D82gTth6K4/edit#gid=0"
+          "value": "Data",
+          "mode": "name"
         },
         "columns": {
           "mappingMode": "defineBelow",
-          "value": {
-            "Time": "={{ $('Schedule Trigger').item.json['Readable date'] }}",
-            "Download": "==INT({{ $json.download }}/1048576)",
-            "Upload": "==INT({{ $json.upload }}/1048576)",
-            "Ping": "==INT({{ $json.ping }})",
-            "Note": "=Test from {{ $json.client.isp }} client to {{ $json.server.sponsor }} server",
-            "Standard Download": "300",
-            "Standard Upload": "300"
-          },
+          "value": {},
           "matchingColumns": [],
           "schema": [
             {
@@ -69,7 +59,8 @@
               "defaultMatch": false,
               "display": true,
               "type": "string",
-              "canBeUsedToMatch": true
+              "canBeUsedToMatch": true,
+              "removed": false
             },
             {
               "id": "Download",
@@ -78,7 +69,8 @@
               "defaultMatch": false,
               "display": true,
               "type": "string",
-              "canBeUsedToMatch": true
+              "canBeUsedToMatch": true,
+              "removed": false
             },
             {
               "id": "Upload",
@@ -87,7 +79,8 @@
               "defaultMatch": false,
               "display": true,
               "type": "string",
-              "canBeUsedToMatch": true
+              "canBeUsedToMatch": true,
+              "removed": false
             },
             {
               "id": "Standard Download",
@@ -96,7 +89,8 @@
               "defaultMatch": false,
               "display": true,
               "type": "string",
-              "canBeUsedToMatch": true
+              "canBeUsedToMatch": true,
+              "removed": false
             },
             {
               "id": "Standard Upload",
@@ -105,7 +99,8 @@
               "defaultMatch": false,
               "display": true,
               "type": "string",
-              "canBeUsedToMatch": true
+              "canBeUsedToMatch": true,
+              "removed": false
             },
             {
               "id": "Ping",
@@ -114,7 +109,8 @@
               "defaultMatch": false,
               "display": true,
               "type": "string",
-              "canBeUsedToMatch": true
+              "canBeUsedToMatch": true,
+              "removed": false
             },
             {
               "id": "Note",
@@ -123,7 +119,8 @@
               "defaultMatch": false,
               "display": true,
               "type": "string",
-              "canBeUsedToMatch": true
+              "canBeUsedToMatch": true,
+              "removed": false
             }
           ],
           "attemptToConvertTypes": false,
@@ -205,7 +202,7 @@
     "callerPolicy": "workflowsFromSameOwner",
     "executionTimeout": -1
   },
-  "versionId": "07105357-e3d1-4af4-87d8-5a72ede8233f",
+  "versionId": "b392b3cd-8d72-42e6-acbb-1ad50c966796",
   "meta": {
     "templateCredsSetupCompleted": true,
     "instanceId": "8c9358e6f79b73ce60c130f8947df0efc1dd8ed02a4bd1a95bd62112ab6b03bf"
