@@ -1,0 +1,215 @@
+{
+  "name": "Internet Speed Tracking",
+  "nodes": [
+    {
+      "parameters": {
+        "rule": {
+          "interval": [
+            {
+              "field": "minutes",
+              "minutesInterval": 15
+            }
+          ]
+        }
+      },
+      "type": "n8n-nodes-base.scheduleTrigger",
+      "typeVersion": 1.2,
+      "position": [
+        0,
+        0
+      ],
+      "id": "db44db52-7407-4ef0-b39a-f705e2ba50b2",
+      "name": "Schedule Trigger"
+    },
+    {
+      "parameters": {
+        "command": "speedtest-cli --json --secure"
+      },
+      "type": "n8n-nodes-base.executeCommand",
+      "typeVersion": 1,
+      "position": [
+        220,
+        0
+      ],
+      "id": "97e13b60-fc11-4417-bac0-977f0fde9ecd",
+      "name": "SpeedTest CLI"
+    },
+    {
+      "parameters": {
+        "operation": "append",
+        "documentId": {
+          "__rl": true,
+          "value": "https://docs.google.com/spreadsheets/d/1L069PZs84Gj0vDDF5qbIaB0O8MUByOGj7D82gTth6K4/edit?gid=0#gid=0",
+          "mode": "url"
+        },
+        "sheetName": {
+          "__rl": true,
+          "value": "gid=0",
+          "mode": "list",
+          "cachedResultName": "Data",
+          "cachedResultUrl": "https://docs.google.com/spreadsheets/d/1L069PZs84Gj0vDDF5qbIaB0O8MUByOGj7D82gTth6K4/edit#gid=0"
+        },
+        "columns": {
+          "mappingMode": "defineBelow",
+          "value": {
+            "Time": "={{ $('Schedule Trigger').item.json['Readable date'] }}",
+            "Download": "==INT({{ $json.download }}/1048576)",
+            "Upload": "==INT({{ $json.upload }}/1048576)",
+            "Ping": "==INT({{ $json.ping }})",
+            "Note": "=Test from {{ $json.client.isp }} client to {{ $json.server.sponsor }} server",
+            "Standard Download": "300",
+            "Standard Upload": "300"
+          },
+          "matchingColumns": [],
+          "schema": [
+            {
+              "id": "Time",
+              "displayName": "Time",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true
+            },
+            {
+              "id": "Download",
+              "displayName": "Download",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true
+            },
+            {
+              "id": "Upload",
+              "displayName": "Upload",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true
+            },
+            {
+              "id": "Standard Download",
+              "displayName": "Standard Download",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true
+            },
+            {
+              "id": "Standard Upload",
+              "displayName": "Standard Upload",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true
+            },
+            {
+              "id": "Ping",
+              "displayName": "Ping",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true
+            },
+            {
+              "id": "Note",
+              "displayName": "Note",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true
+            }
+          ],
+          "attemptToConvertTypes": false,
+          "convertFieldsToString": false
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.googleSheets",
+      "typeVersion": 4.5,
+      "position": [
+        700,
+        0
+      ],
+      "id": "3d861444-5d9c-4698-8382-324d1e9cc2ea",
+      "name": "Google Sheets",
+      "credentials": {
+        "googleSheetsOAuth2Api": {
+          "id": "1L7SReet3t8mN3uc",
+          "name": "Google Sheets account"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "mode": "raw",
+        "jsonOutput": "= {{ $json.stdout }}",
+        "options": {}
+      },
+      "type": "n8n-nodes-base.set",
+      "typeVersion": 3.4,
+      "position": [
+        440,
+        0
+      ],
+      "id": "ba715b34-23cf-43a5-8809-eb3f26b66727",
+      "name": "Format data"
+    }
+  ],
+  "pinData": {},
+  "connections": {
+    "Schedule Trigger": {
+      "main": [
+        [
+          {
+            "node": "SpeedTest CLI",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "SpeedTest CLI": {
+      "main": [
+        [
+          {
+            "node": "Format data",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Format data": {
+      "main": [
+        [
+          {
+            "node": "Google Sheets",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    }
+  },
+  "active": true,
+  "settings": {
+    "executionOrder": "v1",
+    "timezone": "Asia/Ho_Chi_Minh",
+    "callerPolicy": "workflowsFromSameOwner",
+    "executionTimeout": -1
+  },
+  "versionId": "07105357-e3d1-4af4-87d8-5a72ede8233f",
+  "meta": {
+    "templateCredsSetupCompleted": true,
+    "instanceId": "8c9358e6f79b73ce60c130f8947df0efc1dd8ed02a4bd1a95bd62112ab6b03bf"
+  },
+  "id": "08WZ9IcgTb7NHsga",
+  "tags": []
+}

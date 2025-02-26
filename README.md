@@ -2,6 +2,12 @@
 
 This application uses n8n, speedtest-cli, and Google Sheets to automatically track and record your internet speed over time.
 
+![Internet Speed Tracking](Internet_Speed_Tracking.png)
+
+![Data Results](Data.png)
+
+![Internet Speed Tracking Chart](Chart.png)
+
 ## Features
 
 * Automated internet speed checks on a schedule (e.g., hourly, daily).
@@ -29,13 +35,13 @@ This application uses n8n, speedtest-cli, and Google Sheets to automatically tra
     * Create a Service Account and download the JSON file containing credentials.
     * Share your Google Sheet with the created Service Account.
 4.  **Import n8n workflow:**
-    * Download the n8n workflow file from this repository (if available).
+    * Download the n8n workflow file from this repository [Internet Speed Tracking Workflow](Internet_Speed_Tracking.json).
     * Import the workflow file into n8n.
     * Configure the Google Sheets nodes with the downloaded credentials.
     * Configure the `Execute Command` node to run `speedtest-cli`.
     * Adjust the workflow execution schedule as needed.
 5.  **Configure Google Sheet:**
-    * Create a Google Sheet with corresponding columns (Timestamp, Download, Upload, Ping).
+    * Create a Google Sheet with corresponding columns (Timestamp, Download, Upload, Standardized Download, Standardized Upload, Ping, Note).
     * Ensure the sheet ID and sheet name match the configuration in the n8n workflow.
 
 ## Usage
