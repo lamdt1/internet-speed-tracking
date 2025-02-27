@@ -49,7 +49,15 @@
         },
         "columns": {
           "mappingMode": "defineBelow",
-          "value": {},
+          "value": {
+            "Time": "={{ $('Schedule Trigger').item.json['Readable date'] }}",
+            "Download": "==INT({{ $json.download }}/(1024*1024))",
+            "Upload": "==INT({{ $json.upload }}/(1024*1024))",
+            "Standard Download": "300",
+            "Standard Upload": "300",
+            "Ping": "==INT({{ $json.ping }})",
+            "Note": "=Test from {{ $json.client.isp }} client to {{ $json.server.sponsor }} server."
+          },
           "matchingColumns": [],
           "schema": [
             {
@@ -199,10 +207,9 @@
   "settings": {
     "executionOrder": "v1",
     "timezone": "Asia/Ho_Chi_Minh",
-    "callerPolicy": "workflowsFromSameOwner",
-    "executionTimeout": -1
+    "callerPolicy": "workflowsFromSameOwner"
   },
-  "versionId": "b392b3cd-8d72-42e6-acbb-1ad50c966796",
+  "versionId": "df252815-e2de-45f0-ba5f-acc0bcfe06d5",
   "meta": {
     "templateCredsSetupCompleted": true,
     "instanceId": "8c9358e6f79b73ce60c130f8947df0efc1dd8ed02a4bd1a95bd62112ab6b03bf"
